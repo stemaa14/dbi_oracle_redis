@@ -1,0 +1,19 @@
+<div metal:use-macro="load: layout.pt">
+    <div metal:fill-slot="content">
+
+        <div class="content">
+            <div class="product" data-id="${product.id}" tal:repeat="product context.values()">
+                <div class="image-spacer">
+                    <img src="${product.image}" alt="Loading image..." />
+                </div>
+                <span>
+                    <span class="product-name">${product.product_name}</span><br>
+                    <span class="stars">
+                        <i class="${star}" tal:repeat="star product.stars"></i>
+                    </span>
+                </span>
+            </div>
+        </div>
+
+    </div>
+</div>

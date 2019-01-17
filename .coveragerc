@@ -1,0 +1,3 @@
+[run]
+source = dbi_oracle_redis
+omit = dbi_oracle_redis/test*

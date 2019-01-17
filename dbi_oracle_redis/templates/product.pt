@@ -1,0 +1,66 @@
+<div metal:use-macro="load: layout.pt">
+    <div metal:fill-slot="content">
+
+        <div class="content">
+            <div class="product-details">
+                <img src="${context.image}" alt="Loading image..." />
+                <div class="product-content">
+                    <span class="product-name">${context.product_name}</span><br>
+                    <p class="stars">
+                        <i class="${star}" tal:repeat="star context.stars"></i>
+                    </p>
+                    <p>Color: ${context.color}</p>
+                    <span class="price">${context.price} $</span>
+                </div>
+            </div>
+            ${form.begin()}
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label for="name">Name:</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <select name="name" class="form-control input-sm">
+                            <option tal:repeat="customer customers">${customer.first_name} ${customer.last_name}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label for="stars">Bewertung:</label>
+                    </div>
+                    <div class="col-sm-4">
+                        ${form.text('stars', class_='form-control', type='number', min=1, max=5)}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label for="statement">Statement:</label>
+                    </div>
+                    <div class="col-sm-4">
+                        ${form.text('statement', class_='form-control')}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label for="description">Beschreibung:</label>
+                    </div>
+                    <div class="col-sm-4">
+                        ${form.textarea('description', class_='form-control')}
+                    </div>
+                </div>
+                ${form.submit('review.submitted', 'Review speichern', class_='btn btn-default')}
+            ${form.end()}
+            <div class="reviews">
+                <div class="review" tal:repeat="review context.reviews">
+                    <b>${review.statement}</b><br />
+                    <p>
+                        <i class="${star}" tal:repeat="star review.star_classes"></i>
+                    </p>
+                    <p>${review.description}</p>
+                    <span class="small">Von ${review.name} am ${review.date_of_creation.strftime('%d.%m.%Y')}</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
